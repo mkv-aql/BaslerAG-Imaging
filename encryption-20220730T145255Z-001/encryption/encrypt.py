@@ -6,7 +6,7 @@ Created on Fri Jun  3 13:17:28 2022
 """
 from PIL import Image
 import numpy as np
-from Crypto.Cipher import AES
+from Cryptodome.Cipher import AES
 from key_generator.key_generator import generate
 import matplotlib.pyplot as plt
 
