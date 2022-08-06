@@ -6,11 +6,14 @@ def encryptImg():
     print("encrypt.py running")
 """
 
-class ButtonFunctions:
+class imageEncrypt:
     def __init__(self):
         print("Running button function")
         encrypt.Encrypt()
 
-ButtonFunctions()
+
+
+imageEncrypt()
+
 
 
