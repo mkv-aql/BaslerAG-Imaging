@@ -13,7 +13,7 @@ class imageEncrypt:
 
 
 
-imageEncrypt()
+#imageEncrypt()
 
 
 
