@@ -51,11 +51,14 @@ class BaslerApp(tk.Tk):
         self.frames = {}
 
         # For Launching the "Page 1/2/3/4/5/6/7"
-        for F in (StartPage, PageOne):
+        for F in (LoginPage, StartPage, PageOne):
             frame = F(container, self)
             self.frames[F] = frame
             frame.grid(row=0, column=0, sticky="nsew")
-        self.show_frame(StartPage)
+
+        ##Starting page when first run
+        #self.show_frame(StartPage)
+        self.show_frame(LoginPage)
 
     def show_frame(self, cont):
         frame = self.frames[cont]
@@ -63,6 +66,29 @@ class BaslerApp(tk.Tk):
 
 #___________________________________________CLASS WINDOWS_________________________________
 #Adding multiple pages into the program window
+
+class LoginPage(tk.Frame):
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+        label = ttk.Label(self, text="Login PAge", font=LARGE_FONT)
+        label.pack(pady=10, padx=10)
+
+        # Login entry space with button
+        EntryLabel11 = tk.Label(self, text="User Name")
+        e1 = tk.Entry(self)
+        e2 = tk.Entry(self)
+        button11 = ttk.Button(self, text="Login",
+                              command=lambda: [e1.get(), print("Inserted user name: %s <<<<" % (e1.get()))])
+        EntryLabel11.pack()
+        e1.pack(pady=5, padx=5)
+        button11.pack()
+
+
+        button1 = ttk.Button(self, text="Go to Page 1",
+                             command=lambda: controller.show_frame(PageOne))
+
+        button1.pack()
+
 
 class StartPage(tk.Frame):
 
