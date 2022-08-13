@@ -9,7 +9,9 @@ import ButtonFunctions
 
 import matplotlib
 
+#Personal file imports
 import encrypt
+from Userlist import UserInput, UserDict
 
 matplotlib.use("TkAgg")
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
@@ -51,7 +53,7 @@ class BaslerApp(tk.Tk):
         self.frames = {}
 
         # For Launching the "Page 1/2/3/4/5/6/7"
-        for F in (LoginPage, StartPage, PageOne):
+        for F in (LoginPage, StartPage, PageOne, CreateAccount):
             frame = F(container, self)
             self.frames[F] = frame
             frame.grid(row=0, column=0, sticky="nsew")
@@ -76,18 +78,21 @@ class LoginPage(tk.Frame):
         # Login entry space with button
         EntryLabel11 = tk.Label(self, text="User Name")
         e1 = tk.Entry(self)
+        EntryLabel12 = tk.Label(self, text="Password")
         e2 = tk.Entry(self)
         button11 = ttk.Button(self, text="Login",
-                              command=lambda: [e1.get(), print("Inserted user name: %s <<<<" % (e1.get()))])
+                              command=lambda: [e1.get(), e2.get(), print("Inserted user name: %s, Password: %s <<<<" % (e1.get(), e2.get()))])
         EntryLabel11.pack()
         e1.pack(pady=5, padx=5)
+        EntryLabel12.pack()
+        e2.pack(pady=5, padx=5)
+
         button11.pack()
 
+        button12 = ttk.Button(self, text="Create new account",
+                             command=lambda: controller.show_frame(CreateAccount))
 
-        button1 = ttk.Button(self, text="Go to Page 1",
-                             command=lambda: controller.show_frame(PageOne))
-
-        button1.pack()
+        button12.pack()
 
 
 class StartPage(tk.Frame):
@@ -119,6 +124,31 @@ class PageOne(tk.Frame):
         button11 = ttk.Button(self, text="Encrypt selected image",
                               command=lambda: ButtonFunctions.imageEncrypt())
         button11.pack()
+
+class CreateAccount(tk.Frame):
+
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+        label = ttk.Label(self, text="Create new account", font=LARGE_FONT)
+
+        label.pack(pady=5, padx=5)
+
+        #Entry for new accounts (username and password)
+        EntryLabel11 = tk.Label(self, text="User Name")
+        e1 = tk.Entry(self)
+        EntryLabel12 = tk.Label(self, text="Password")
+        e2 = tk.Entry(self)
+
+        EntryLabel11.pack()
+        e1.pack(pady=5, padx=5)
+        EntryLabel12.pack()
+        e2.pack(pady=5, padx=5)
+
+        #Insert user input and password into UserlistExample.py dictionary
+        button11 = ttk.Button(self, text="Create",
+                              command=lambda: [UserInput.insertuser(e1.get(), e2.get()), print(UserDict.username)])
+        button11.pack()
+
 
 """ 
 def button1():
